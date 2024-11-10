@@ -44,6 +44,24 @@ In this example:
 - **To improve readability**: Sorting results makes it easier to analyze or visualize the data, especially when dealing with large datasets.
 - **When displaying reports**: Sorting is often necessary for creating meaningful reports, where data needs to be in a logical sequence (e.g., ranking, chronological order, etc.).
 
+## JOINS
+Joins allow you to combine data from multiple tables based on related columns, which is essential in relational databases.
+
+### Types of Joins
+
+#### **INNER JOIN**
+- **Definition**: An `INNER JOIN` combines rows from two tables based on a matching condition (usually through the `ON` statement). It only returns rows where there is a match in both tables.
+- **Example**: If you have two tables, `customers` and `orders`, the `INNER JOIN` will return only customers who have placed orders.
+
+#### **LEFT JOIN (LEFT OUTER JOIN)**
+- **Definition**: A `LEFT JOIN` returns all rows from the left table and the matching rows from the right table. If no match is found, the result will include `NULL` for columns from the right table.
+- **Example**: If a customer has no orders, the result will still include that customer’s information, but the order details will be `NULL`.
+
+#### **RIGHT JOIN (RIGHT OUTER JOIN)**
+- **Definition**: A `RIGHT JOIN` is similar to a `LEFT JOIN`, but it returns all rows from the right table and the matching rows from the left table. If no match is found, the result will include `NULL` for columns from the left table.
+- **Example**: If there are orders with no matching customer, the result will still include the order details, but the customer information will be `NULL`.
+
+
 
 
 
