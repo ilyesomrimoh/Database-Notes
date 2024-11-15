@@ -2,6 +2,10 @@
 ## SQL (Structured Query Language)
 Sql is a programming language designed for working with databases, particularly relational databases. 
 
+1. SQL is a **Declarative** programming language which means it focuses on **what** you want to achieve rather than *how* to do it.  
+2. You only need to specify the desired result, and the DBMS figures out how to execute it.
+
+
 ## Query
 A query is a piece of SQL code executed to retrieve or manipulate data, commonly referred to as "querying the database.
 
