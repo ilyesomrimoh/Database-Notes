@@ -32,15 +32,85 @@ To use databases and SQL, you need a **Database Management System (DBMS)**. A DB
 5. **Others**:  
    - SQL Server, SQLite, etc., each catering to different needs.
 
-## Schema
+## SQL syntax 
 
-A schema is the structure or blueprint of a database that defines tables, relationships (e.g., foreign keys), data types, and how data is organized.
 
-### Schemas in Different Database Systems
-- **MySQL:** A schema is essentially the same as a database.
-- **Oracle:** A schema is a collection of objects (tables, views, sequences, stored procedures, etc.) owned by a single user. Each user in Oracle has their own schema, and only that user can create, modify, or delete objects within it (unless they give permission to others).
-  In Oracle, schemas help separate and secure user-specific data while allowing shared access when permissions are granted
+SQL syntax grouped into the categories of DDL, DML, DCL, and TCL:
 
+### **1. Data Definition Language (DDL)**  
+Used to define or modify the structure of the database.  
+**Commands**:  
+- `CREATE` – Create new database objects (e.g., tables, views).  
+  ```sql
+  CREATE TABLE employees (id INT, name VARCHAR(50));
+  ```  
+- `ALTER` – Modify existing database objects.  
+  ```sql
+  ALTER TABLE employees ADD COLUMN department VARCHAR(50);
+  ```  
+- `DROP` – Delete database objects.  
+  ```sql
+  DROP TABLE employees;
+  ```  
+- `TRUNCATE` – Remove all records from a table without removing the table itself.  
+  ```sql
+  TRUNCATE TABLE employees;
+  ```
+
+---
+
+### **2. Data Manipulation Language (DML)**  
+Used to manipulate data stored in the database.  
+**Commands**:  
+- `SELECT` – Retrieve data from one or more tables.  
+  ```sql
+  SELECT * FROM employees;
+  ```  
+- `INSERT` – Add new records to a table.  
+  ```sql
+  INSERT INTO employees (id, name, department) VALUES (1, 'John', 'Sales');
+  ```  
+- `UPDATE` – Modify existing records.  
+  ```sql
+  UPDATE employees SET department = 'Marketing' WHERE id = 1;
+  ```  
+- `DELETE` – Remove specific records.  
+  ```sql
+  DELETE FROM employees WHERE id = 1;
+  ```
+
+---
+
+### **3. Data Control Language (DCL)**  
+Used to control access to the database.  
+**Commands**:  
+- `GRANT` – Provide permissions to users.  
+  ```sql
+  GRANT SELECT, INSERT ON employees TO user1;
+  ```  
+- `REVOKE` – Remove permissions from users.  
+  ```sql
+  REVOKE INSERT ON employees FROM user1;
+  ```
+
+---
+
+### **4. Transaction Control Language (TCL)**  
+Used to manage transactions within a database.  
+**Commands**:  
+- `COMMIT` – Save all changes made in a transaction.  
+  ```sql
+  COMMIT;
+  ```  
+- `ROLLBACK` – Undo changes made in a transaction.  
+  ```sql
+  ROLLBACK;
+  ```  
+- `SAVEPOINT` – Set a point within a transaction to roll back to later.  
+  ```sql
+  SAVEPOINT savepoint1;
+  ROLLBACK TO savepoint1;
+  ```
 
 ## GROUP BY
 The GROUP BY clause is used to group rows that have the same values in specified columns into summary rows, such as finding the average, sum, count, or maximum/minimum values for each group. It’s often used with aggregate functions like COUNT(), SUM(), AVG(), MAX(), and MIN().
@@ -184,3 +254,13 @@ Each isolation level comes with a trade-off between data consistency and system 
 - **For maximum consistency with low concurrency**, use `Serializable`.
 
 Understanding and choosing the right isolation level is key for building robust applications where transactional integrity and performance are in balance. 
+
+
+## Schema
+
+A schema is the structure or blueprint of a database that defines tables, relationships (e.g., foreign keys), data types, and how data is organized.
+
+### Schemas in Different Database Systems
+- **MySQL:** A schema is essentially the same as a database.
+- **Oracle:** A schema is a collection of objects (tables, views, sequences, stored procedures, etc.) owned by a single user. Each user in Oracle has their own schema, and only that user can create, modify, or delete objects within it (unless they give permission to others).
+  In Oracle, schemas help separate and secure user-specific data while allowing shared access when permissions are granted.
