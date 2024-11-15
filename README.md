@@ -1,4 +1,32 @@
 # Database
+## SQL (Structured Query Language)
+Sql is a programming language designed for working with databases, particularly relational databases. 
+
+## Query
+A query is a piece of SQL code executed to retrieve or manipulate data, commonly referred to as "querying the database.
+
+## Database Management Systems (DBMS)  
+To use databases and SQL, you need a **Database Management System (DBMS)**. A DBMS is a platform that allows you to create, manage, and interact with databases efficiently. It provides tools for data storage, retrieval, and management.
+
+### **Popular DBMS Examples**:
+1. **MySQL**:  
+   - Open-source and free.  
+   - Developed by the same company behind Oracle.  
+
+2. **Oracle Database**:  
+   - A commercial, paid DBMS.  
+   - Offers advanced features for enterprise use.  
+
+3. **PostgreSQL**:  
+   - Open-source and highly versatile.  
+   - Known for its performance and extensibility.  
+
+4. **MariaDB**:  
+   - A fork of MySQL.  
+   - Free and open-source with a focus on performance.  
+
+5. **Others**:  
+   - SQL Server, SQLite, etc., each catering to different needs.
 
 ## Schema
 
