@@ -270,3 +270,9 @@ A schema is the structure or blueprint of a database that defines tables, relati
 ## Some Notes
 - The maximum size of **CHAR** is 255 characters, while **VARCHAR** can hold up to 65,535 characters.  
 - **CHAR** is faster than **VARCHAR** due to its fixed-length structure, which enables the database to access and process data more quickly.
+- integer types like INT are signed by default, meaning they can store both positive and negative values. If only positive values are needed, you must specify the UNSIGNED keyword in the query.
+- **DECIMAL** and **NUMIRIC** are  Numbers with a fixed number of digits before and after the decimal point. ex: DECIMAL(5, 2)
+- **FLOAT** or **REAL** and **DOUBLE**  or  **DOUBLE PRECISION** are  Numbers with a decimal point that can "float," meaning the number of digits before and after the decimal point can vary.
+- **Fixed-Point** Data Types are slower and more storage intensive than the **Floating-Point** Data Types
+-**BLOB** is a data type in SQL used to store large amounts of unstructured binary data, such as images, audio files, and video files (generally better to store file paths or URLs  and store the files themselves in a file system or object storage system for efficiency.)
+-**TIMESTAMP** data type has a limited range, from January 1, 1970, to January 19, 2038, making it less suitable for storing birthdates. DATE or DATETIME would be more appropriate.
