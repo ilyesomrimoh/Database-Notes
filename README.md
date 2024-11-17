@@ -266,3 +266,7 @@ A schema is the structure or blueprint of a database that defines tables, relati
 - **MySQL:** A schema is essentially the same as a database.
 - **Oracle:** A schema is a collection of objects (tables, views, sequences, stored procedures, etc.) owned by a single user. Each user in Oracle has their own schema, and only that user can create, modify, or delete objects within it (unless they give permission to others).
   In Oracle, schemas help separate and secure user-specific data while allowing shared access when permissions are granted.
+
+## Some Notes
+- The maximum size of **CHAR** is 255 characters, while **VARCHAR** can hold up to 65,535 characters.  
+- **CHAR** is faster than **VARCHAR** due to its fixed-length structure, which enables the database to access and process data more quickly.
