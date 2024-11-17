@@ -1,4 +1,6 @@
 # Database
+## Database Goal
+The main goal of a database is not just to store data, but to organize the data we want to store in a way that allows it to be quickly retrieved upon user request.
 ## SQL (Structured Query Language)
 Sql is a programming language designed for working with databases, particularly relational databases. 
 
