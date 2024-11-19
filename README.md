@@ -1,6 +1,7 @@
 # Database
 ## Database Goal
 The main goal of a database is not just to store data, but to organize the data we want to store in a way that allows it to be quickly retrieved upon user request.
+
 ## SQL (Structured Query Language)
 Sql is a programming language designed for working with databases, particularly relational databases. 
 
@@ -113,7 +114,71 @@ Used to manage transactions within a database.
   SAVEPOINT savepoint1;
   ROLLBACK TO savepoint1;
   ```
+## SQL Constraints
 
+1. **PRIMARY KEY**:  
+   Ensures that each row in a table has a unique identifier. Combines the properties of **NOT NULL** and **UNIQUE**. A table can have only one primary key.
+  ```sql
+   CREATE TABLE Employees (
+    id INT PRIMARY KEY,
+);
+ ```
+
+3. **FOREIGN KEY**:  
+   Ensures referential integrity by creating a link between two tables. A foreign key in one table points to the primary key in another table.
+```sql
+   CREATE TABLE Orders (
+        FOREIGN KEY (customer_id) REFERENCES Customers(id)
+);
+ ```
+
+5. **NOT NULL**:  
+   Ensures that a column cannot have NULL values, meaning every row must have a value for this column.
+
+```sql
+CREATE TABLE Products (
+    product_name VARCHAR(100) NOT NULL
+);
+ ```
+
+7. **UNIQUE**:  
+   Guarantees that all values in a column are distinct, preventing duplicate entries.
+
+8. **CHECK**:  
+   Ensures that all values in a column meet a specific condition.  
+   Example:  
+   ```sql
+   CHECK (salary > 0)
+   ```
+
+9. **DEFAULT**:  
+   Assigns a default value to a column if no value is provided.  
+   Example:  
+   ```sql
+   DEFAULT CURRENT_TIMESTAMP
+   ```
+
+10. **INDEX**:  
+   Enhances the speed of data retrieval operations on a table by creating an ordered data structure for a specific column or set of columns.
+``` SQL
+CREATE INDEX idx_author_id ON Books (author_id);
+```
+
+---
+
+### Notes:
+
+1. **ON DELETE CASCADE**:  
+   When applied to a foreign key, it ensures that if a record in the parent table is deleted, all corresponding records in the child table are also automatically deleted.
+
+2. **UNIQUE KEY and Index in MySQL**:  
+   In MySQL, applying a UNIQUE constraint automatically creates an **index** for the column, allowing faster access and retrieval of data.
+
+
+
+
+
+   
 ## GROUP BY
 The GROUP BY clause is used to group rows that have the same values in specified columns into summary rows, such as finding the average, sum, count, or maximum/minimum values for each group. It’s often used with aggregate functions like COUNT(), SUM(), AVG(), MAX(), and MIN().
 
