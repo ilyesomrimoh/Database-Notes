@@ -230,7 +230,23 @@ Joins allow you to combine data from multiple tables based on related columns, w
 - **Definition**: A `RIGHT JOIN` is similar to a `LEFT JOIN`, but it returns all rows from the right table and the matching rows from the left table. If no match is found, the result will include `NULL` for columns from the left table.
 - **Example**: If there are orders with no matching customer, the result will still include the order details, but the customer information will be `NULL`.
 
+### Working with Dates in MySQL
 
+- **Comparing Dates**: Use standard comparison operators (`=`, `<`, `>`, `<=`, `>=`, `<>`).
+- **Getting Today's Date**: `CURDATE()` returns the current date.
+- **Extracting Date Parts**: Use `YEAR()`, `MONTH()`, and `DAY()` to extract specific parts of a date:
+  ```sql
+  SELECT YEAR(orderDate), MONTH(orderDate), DAY(orderDate) FROM Orders;
+  ```
+- **Date Arithmetic**: 
+  - To subtract one day from a date, use `DATE_SUB()`:
+    ```sql
+    DATE_SUB(w1.recordDate, INTERVAL 1 DAY)
+    ```
+  - Alternatively, you can subtract directly using:
+    ```sql
+    w1.recordDate - INTERVAL 1 DAY
+    ```
 
 ## when to use NOT EXISTS and LEFT JOIN with NULL value checks:
 
