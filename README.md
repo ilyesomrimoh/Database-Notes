@@ -232,8 +232,68 @@ Joins allow you to combine data from multiple tables based on related columns, w
 
 
 
+## when to use NOT EXISTS and LEFT JOIN with NULL value checks:
 
+   ### Use NOT EXISTS:
+   
+   **Sparse Matches:** When few matches are expected between the two tables.
+   **Short-Circuit Evaluation:** If stopping at the first match improves performance (e.g., with well-indexed data).
+   **Direct Logic:** When you only care about the presence or absence of rows, not additional data.
+   **Cleaner Query Logic:** For simpler readability when checking for non-existence.
+   **Index Optimization:** When the database engine optimizes correlated subqueries effectively (e.g., with indexed columns).
+   
+   ### Use LEFT JOIN with IS NULL:
+   **Additional Data:** If you need to retrieve extra columns from the main table or the joined table.
+   **Compatibility:** When working with older databases that might not optimize NOT EXISTS well.
+   **Complex Joins:** If the query involves multiple joins and the data structure favors LEFT JOIN.
+   **Non-Correlated Logic:** When avoiding correlated subqueries due to potential inefficiencies in your database engine.
 
+### Modifying Tables While Querying Them
+
+1. **General Rule**:  
+   - MySQL does **not allow modifying a table** (e.g., `DELETE`, `UPDATE`) while querying the same table in a `FROM` clause.
+
+2. **Reason for Restriction**:  
+   - Prevents ambiguous behavior or inconsistencies during execution.
+
+3. **Example in MySQL**:  
+   ```sql
+   -- Causes an error:
+   DELETE FROM Person
+   WHERE email = (
+       SELECT email
+       FROM Person p
+       WHERE p.id < Person.id
+   );
+   ```
+   **Error**: *"You can't specify target table 'Person' for update in FROM clause."*
+
+4. **Workarounds**:
+   - **Self-Join**:
+     ```sql
+     DELETE p1
+     FROM Person p1
+     JOIN Person p2
+     ON p1.email = p2.email AND p1.id > p2.id;
+     ```
+   - **Temporary Table**:
+     ```sql
+     CREATE TEMPORARY TABLE TempPerson AS
+     SELECT id FROM Person p1
+     JOIN Person p2
+     ON p1.email = p2.email AND p1.id > p2.id;
+
+     DELETE FROM Person
+     WHERE id IN (SELECT id FROM TempPerson);
+     ```
+
+5. **Other Databases**:  
+   - PostgreSQL and SQL Server allow such queries.
+
+6. **Best Practice**:  
+   - Use **`JOIN`-based solutions** in MySQL for performance and compatibility.  
+   - Test and optimize for large datasets using indexes or temporary tables.
+     
 ## TRANSACTION
 A transaction in SQL is a group of operations treated as a single unit, ensuring that either all changes are applied, or none are, maintaining the consistency and reliability of the database. This process ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
 
@@ -241,16 +301,14 @@ A transaction in SQL is a group of operations treated as a single unit, ensuring
 A transaction differs from a simple SQL script by using the BEGIN TRANSACTION command to start and the COMMIT or ROLLBACK command to end it.
 
 Example:
-
-sql
-Copy code
+```sql
 BEGIN TRANSACTION;
-
+```
 -- SQL operations (e.g., updates, inserts)
-
+```sql
 COMMIT;  -- Saves the changes
--- OR
 ROLLBACK;  -- Reverts the changes if something goes wrong
+```
 ### When to Use a Transaction:
 Grouping operations: When you need to perform multiple operations that must succeed or fail together, like transferring money between accounts or updating related data.
 Error handling: To ensure changes are only applied if all operations succeed, maintaining data integrity.
