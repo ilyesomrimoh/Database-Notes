@@ -309,7 +309,98 @@ Joins allow you to combine data from multiple tables based on related columns, w
 6. **Best Practice**:  
    - Use **`JOIN`-based solutions** in MySQL for performance and compatibility.  
    - Test and optimize for large datasets using indexes or temporary tables.
-     
+
+
+### Summary of Window Functions in SQL
+
+#### **What Are Window Functions?**
+- **Window functions** perform calculations across a set of rows related to the current row without collapsing the rows into a single result. 
+- Common use cases: Ranking, calculating running totals, computing moving averages, and accessing specific rows.
+
+---
+
+#### **Difference Between Window Functions and Aggregate Functions**
+| **Window Functions**                             | **Aggregate Functions**                        |
+|--------------------------------------------------|-----------------------------------------------|
+| Operate on a "window" of rows but return a value for **each row**. | Operate on a group of rows and return **one value per group**. |
+| Preserve all rows in the result.                 | Reduce the number of rows (collapse groups).  |
+| Example: `SUM(salary) OVER (PARTITION BY dept)` returns the sum for each row in its department. | Example: `SUM(salary)` returns one total value for all rows. |
+
+---
+
+#### **Syntax of Window Functions**
+```sql
+<function_name> (arguments) 
+OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column1 ASC|DESC, column2 ASC|DESC]
+    [ROWS | RANGE BETWEEN <frame_specification>]
+)
+```
+
+- **Function Name**: The window function to apply (e.g., `ROW_NUMBER`, `SUM`, `RANK`).
+- **PARTITION BY**: Divides the data into partitions, and the function is applied within each partition.
+- **ORDER BY**: Specifies the order of rows within the partition for function evaluation.
+- **ROWS/RANGE**: Defines the window frame (optional).
+
+---
+
+#### **ORDER BY and PARTITION BY**
+- **PARTITION BY**:
+  - Groups rows into partitions for the window function.
+  - Without `PARTITION BY`, the function operates on all rows.
+  - Example: `SUM(salary) OVER (PARTITION BY department_id)`.
+
+- **ORDER BY**:
+  - Defines the order of rows within the partition.
+  - Necessary for ranking and navigation functions like `ROW_NUMBER` or `LAG`.
+  - Example: `RANK() OVER (PARTITION BY department_id ORDER BY salary DESC)`.
+---
+
+#### **List of Common Window Functions**
+
+1. **Aggregate Functions**:
+   - Perform cumulative calculations without collapsing rows.
+   - Examples: 
+     - `SUM()`: Total of the window.
+     - `AVG()`: Average of the window.
+     - `MIN()`, `MAX()`: Minimum/maximum value in the window.
+     - `COUNT()`: Count of rows in the window.
+
+2. **Ranking Functions**:
+   - Assign ranks or sequence numbers to rows.
+   - Examples:
+     - `ROW_NUMBER()`: Assigns a unique sequential number to rows.
+     - `RANK()`: Assigns rank with gaps for ties.
+     - `DENSE_RANK()`: Assigns rank without gaps for ties.
+     - `NTILE(n)`: Divides rows into `n` equal groups.
+
+3. **Navigation Functions**:
+   - Retrieve values from specific rows within the window.
+   - Examples:
+     - `LAG()`: Returns the value from the previous row.
+     - `LEAD()`: Returns the value from the next row.
+     - `FIRST_VALUE()`: Returns the first value in the window.
+     - `LAST_VALUE()`: Returns the last value in the window.
+     - `NTH_VALUE(n)`: Returns the nth value in the window.
+
+4. **Statistical Functions**:
+   - Perform percentile calculations or cumulative distribution.
+   - Examples:
+     - `PERCENT_RANK()`: Relative rank as a percentage (0 to 1).
+     - `CUME_DIST()`: Cumulative distribution (percentage of rows ≤ current row).
+
+
+  ```md
+  ![Window Functions Example](images/window-functions-example.png "SQL Window Functions")
+  ```
+
+
+
+
+
+
+
 ## TRANSACTION
 A transaction in SQL is a group of operations treated as a single unit, ensuring that either all changes are applied, or none are, maintaining the consistency and reliability of the database. This process ensures the ACID properties (Atomicity, Consistency, Isolation, Durability).
 
