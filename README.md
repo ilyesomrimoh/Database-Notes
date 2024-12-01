@@ -391,9 +391,8 @@ OVER (
      - `CUME_DIST()`: Cumulative distribution (percentage of rows ≤ current row).
 
 
-  ```md
-  ![Window Functions Example](images/window-functions-example.png "SQL Window Functions")
-  ```
+    ![Window Functions Example](https://cdn.sanity.io/images/oaglaatp/production/e0d2b575fa404eec7c9bedcae9c3818261ffe1ab-1200x800.png) "SQL Window Functions")
+  
 
 
 
