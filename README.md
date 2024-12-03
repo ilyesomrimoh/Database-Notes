@@ -394,9 +394,92 @@ OVER (
     ![Window Functions Example](https://cdn.sanity.io/images/oaglaatp/production/e0d2b575fa404eec7c9bedcae9c3818261ffe1ab-1200x800.png) "SQL Window Functions")
   
 
+The `CASE` function in SQL is a powerful conditional expression used to create derived values or classifications based on specified conditions. It acts as a control flow mechanism, similar to `if-else` statements in programming.
+
+---
+
+### Syntax of `CASE` in SQL
+
+There are two types of `CASE` statements:
+
+#### 1. **Simple CASE**
+This evaluates a single expression against multiple values and returns a result.
+
+```sql
+CASE expression
+    WHEN value1 THEN result1
+    WHEN value2 THEN result2
+    ...
+    ELSE default_result
+END
+```
+
+#### 2. **Searched CASE**
+This evaluates multiple conditions and returns a result based on the first condition that evaluates to `TRUE`.
+
+```sql
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE default_result
+END
+```
+
+---
+
+### Key Features
+- **Versatile**: Can be used in `SELECT`, `UPDATE`, `INSERT`, and `ORDER BY` statements.
+- **Flexible**: Handles both equality checks and complex conditions.
+- **Default Value**: The `ELSE` clause provides a fallback if no conditions match.
 
 
 
+
+### Common Table Expression (CTE) in SQL
+
+A **Common Table Expression (CTE)** is a temporary result set in SQL that can be referenced within the main SQL query. CTEs make queries more readable and maintainable, especially when dealing with complex queries or calculations.
+
+---
+
+### Syntax of CTE
+
+The basic syntax for a CTE is:
+
+```sql
+WITH cte_name AS (
+    -- SQL query defining the CTE
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+)
+-- Main query using the CTE
+SELECT * 
+FROM cte_name;
+```
+
+---
+
+
+### When to Use CTE
+
+- Simplifying complex queries by dividing them into logical parts.
+- When multiple queries use the same derived data.
+- Writing recursive queries, such as for hierarchical data like organizational charts or tree structures.
+
+---
+
+
+
+
+### CTE vs Subquery vs Temporary Table
+
+| Feature             | CTE                     | Subquery                 | Temporary Table            |
+|---------------------|-------------------------|--------------------------|----------------------------|
+| **Scope**           | Current query only      | Current query only       | Session-wide              |
+| **Readability**     | More readable           | Less readable            | Requires additional steps |
+| **Recursive**       | Yes                     | No                       | No                        |
+| **Performance**     | Generally efficient     | Can be less efficient    | More suitable for large datasets |
 
 
 
